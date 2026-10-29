@@ -1,0 +1,17 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pytest
+      # exit code 5 = "no tests collected", which is fine early on
+      - run: pytest || [ $? -eq 5 ]
+      - name: Check PROGRESS.md is up to date
+        run: |
+          python tools/progress.py
+          git diff --exit-code PROGRESS.md || (echo "Run: python tools/progress.py" && exit 1)

@@ -1,0 +1,9 @@
+[project]
+name = "dsa-python-journey"
+version = "0.1.0"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+addopts = "--import-mode=importlib -q"
+testpaths = ["chapters", "dsa"]
