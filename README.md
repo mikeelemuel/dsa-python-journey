@@ -35,6 +35,8 @@ The first session of each chapter is reading only, plus filling in the chapter R
 
 ## Session routine
 
+Full details (test-first steps, when stuck, chapter rhythm, commit conventions): [WORKFLOW.md](WORKFLOW.md)
+
 1. `python tools/progress.py --next` to see where I left off
 2. Open those files and read the problem in the docstring (or `python tools/show.py R-5.7`)
 3. Solve. In each file set `Status: done`, `Date:`, `Time:`, then write the approach and a test
