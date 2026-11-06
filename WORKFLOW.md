@@ -33,6 +33,8 @@ python tools/progress.py --next     # e.g. Next up: R-1.1, R-1.2, R-1.3
 
 ### 3. Write the test first
 
+Template and tips: [TESTING.md](TESTING.md)
+
 `chapters/ch01_python_primer/tests/test_r01_01.py`:
 
 ```python
