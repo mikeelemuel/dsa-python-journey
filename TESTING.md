@@ -7,6 +7,11 @@ How I write a test for an exercise. Run them with `pytest` (see [WORKFLOW.md](WO
 | Exercise | Test file |
 |---|---|
 | `chapters/ch01_python_primer/reinforcement/r01_02.py` | `chapters/ch01_python_primer/tests/test_r01_02.py` |
+| `chapters/ch01_python_primer/real_world/s07_exceptions/w01_07_3.py` | `chapters/ch01_python_primer/tests/real_world/test_w01_07_3.py` |
+
+Real-world imports include the section folder:
+`from chapters.ch01_python_primer.real_world.s07_exceptions.w01_07_3 import withdraw`.
+Interactive ones (menus, `input()` loops) can skip tests; put the testable logic in a function if you want one.
 
 pytest only finds files named `test_*.py` and functions named `test_*`.
 

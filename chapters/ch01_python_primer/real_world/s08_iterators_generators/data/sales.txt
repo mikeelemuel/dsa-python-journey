@@ -1,0 +1,6 @@
+# date,item,amount
+2026-11-01,taho,25
+2026-11-01,balut,22
+bad line here
+2026-11-02,taho,30
+2026-11-02,fishball,15

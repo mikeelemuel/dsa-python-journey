@@ -27,7 +27,8 @@ python tools/progress.py --next     # e.g. Next up: R-1.1, R-1.2, R-1.3
 
 ### 2. Read and plan (about 5 min per exercise)
 
-- Open the file, e.g. `chapters/ch01_python_primer/reinforcement/r01_01.py`
+- Open the file, e.g. `chapters/ch01_python_primer/real_world/s06_input_output/w01_06_1.py`
+  (real-world exercises come first in "Up next", then the book's reinforcement)
 - Set `Status: in-progress`
 - Write the idea in `Approach:` **before** coding
 
@@ -71,7 +72,7 @@ pytest                              # whole repo still passes
 python tools/progress.py            # refresh PROGRESS.md
 # add 2-3 lines to journal/YYYY-MM.md
 git add -A
-git commit -m "ch01: R-1.1, R-1.2, R-1.3"
+git commit -m "ch01: W-1.6.1, W-1.6.2, R-1.4"
 git push
 ```
 
@@ -100,7 +101,7 @@ For proofs, explanations, and "describe..." questions:
 | When | What |
 |---|---|
 | First session | Read the chapter; fill in its `README.md` (key ideas, complexity table) |
-| Sessions 2 to N | Reinforcement first, then creativity |
+| Sessions 2 to N | Real-world first, then reinforcement, then creativity |
 | Book builds a class (ArrayStack, LinkedQueue...) | Move my version into `dsa/` with its own test; import it in later chapters |
 | Weekend (optional) | One project from the chapter |
 | Last session | Re-read chapter notes and journal, then `git tag chNN-done && git push --tags` |
@@ -109,6 +110,7 @@ For proofs, explanations, and "describe..." questions:
 
 ```
 ch05: R-5.6, R-5.7, C-5.13              normal session
+ch01: W-1.6.1, W-1.6.2, R-1.4           real-world + book in one session
 ch06: add ArrayStack to dsa/            reusable code
 ch05: revisit C-5.20 (O(n) solution)    improving an old answer
 chore: update tools/progress.py         repo housekeeping
@@ -119,6 +121,7 @@ chore: update tools/progress.py         repo housekeeping
 ```bash
 python tools/progress.py --next   # what's next
 python tools/show.py R-5.7        # re-read a problem from the PDF
+python tools/show.py W-1.6.3      # re-read a real-world problem (no PDF needed)
 pytest chapters/ch05_* -q         # test one chapter
 pytest                            # test everything
 python tools/progress.py          # refresh tracker

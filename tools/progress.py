@@ -1,5 +1,8 @@
 """Rebuild PROGRESS.md from the `Status:` line in every exercise file.
 
+Book exercises are r/c/p files (r01_04.py is R-1.4). Real-world exercises are
+w files (w01_06_3.py is W-1.6.3) and come first within each chapter.
+
 Usage:
     python tools/progress.py          # rebuild PROGRESS.md
     python tools/progress.py --next   # also print the next 5 exercises to do
@@ -13,7 +16,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CHAPTERS = ROOT / "chapters"
 OUT = ROOT / "PROGRESS.md"
-FILE_RE = re.compile(r"^([rcp])(\d{2})_(\d{2})\.py$")
+FILE_RE = re.compile(r"^(?:([rcp])(\d{2})_(\d{2})|(w)(\d{2})_(\d{2})_(\d{1,2}))\.py$")
+ORDER = {"W": 0, "R": 1, "C": 2, "P": 3}  # real-world first, then the book's order
 STATUS_RE = re.compile(r"^Status:\s*([\w-]+)", re.M)
 DATE_RE = re.compile(r"^Date:\s*(\d{4}-\d{2}-\d{2})", re.M)
 TITLE_RE = re.compile(r"^# Chapter \d+: (.+)$", re.M)
@@ -25,17 +29,22 @@ def scan():
         m = FILE_RE.match(f.name)
         if not m:
             continue
-        kind, ch, n = m.group(1).upper(), int(m.group(2)), int(m.group(3))
+        if m.group(4):
+            kind, ch, n, sub = "W", int(m.group(5)), int(m.group(6)), int(m.group(7))
+            ex_id = f"W-{ch}.{n}.{sub}"
+        else:
+            kind, ch, n, sub = m.group(1).upper(), int(m.group(2)), int(m.group(3)), 0
+            ex_id = f"{kind}-{ch}.{n}"
         head = f.read_text(encoding="utf-8")[:1500]
         s = STATUS_RE.search(head)
         d = DATE_RE.search(head)
         rows.append({
-            "id": f"{kind}-{ch}.{n}", "kind": kind, "ch": ch, "n": n,
+            "id": ex_id, "kind": kind, "ch": ch, "n": n, "sub": sub,
             "status": s.group(1).lower() if s else "todo",
             "date": d.group(1) if d else None,
             "path": f.relative_to(ROOT).as_posix(),
         })
-    return sorted(rows, key=lambda r: (r["ch"], r["n"]))
+    return sorted(rows, key=lambda r: (r["ch"], ORDER[r["kind"]], r["n"], r["sub"]))
 
 
 def bar(done, total, width=20):
@@ -90,15 +99,15 @@ def main():
         f"**Sessions logged:** {len(set(dated))} · **Weekday streak:** {streak(dated)} · "
         f"**Last session:** {max(dated) if dated else 'none yet'}",
         "",
-        "| Ch | Topic | Reinforcement | Creativity | Projects | Progress |",
-        "|---:|---|:---:|:---:|:---:|---|",
+        "| Ch | Topic | Real-world | Reinforcement | Creativity | Projects | Progress |",
+        "|---:|---|:---:|:---:|:---:|:---:|---|",
     ]
     for ch in sorted(per):
         k = per[ch]
         d = sum(v[0] for v in k.values())
         t = sum(v[1] for v in k.values())
-        cell = lambda x: f"{k[x][0]}/{k[x][1]}"
-        lines.append(f"| {ch} | {titles.get(ch, '')} | {cell('R')} | {cell('C')} | "
+        cell = lambda x: f"{k[x][0]}/{k[x][1]}" if k[x][1] else "–"
+        lines.append(f"| {ch} | {titles.get(ch, '')} | {cell('W')} | {cell('R')} | {cell('C')} | "
                      f"{cell('P')} | `{bar(d, t, 10)}` {100 * d / t:.0f}% |")
 
     lines += ["", "## Up next", ""]

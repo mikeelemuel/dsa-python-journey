@@ -11,6 +11,7 @@ Working through every chapter of *Data Structures and Algorithms in Python*
 ```
 chapters/chNN_topic/
     README.md          my notes for the chapter
+    real_world/        W-x.y.z  real-world scenarios, done first
     reinforcement/     R-x.y  short drills
     creativity/        C-x.y  harder problems
     projects/          P-x.y  bigger builds
@@ -18,15 +19,17 @@ chapters/chNN_topic/
 dsa/                   reusable classes I build (stacks, queues, trees...)
 journal/YYYY-MM.md     2-3 lines per session
 tools/progress.py      rebuilds PROGRESS.md from each file's Status: line
-tools/show.py          prints an exercise's text from my local copy of the PDF
+tools/show.py          prints an exercise's text (book: from my local PDF; real-world: from its file)
 ```
 
 File names follow the book: `r05_07.py` is **R-5.7**.
+Real-world files add the exercise number: `w01_06_3.py` is **W-1.6.3** (section 1.6, exercise 3).
 
 ## Pacing plan
 
 | Type | Plan | Per session |
 |---|---|---|
+| Real-world | do all, before the book drills | 2 to 3 |
 | Reinforcement | do all | 3 to 5 |
 | Creativity | about half (`Status: skipped` for the rest) | 1 to 2 |
 | Projects | 1 to 2 per chapter, on weekends | n/a |

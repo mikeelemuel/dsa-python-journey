@@ -7,3 +7,9 @@ book/
 *.pdf
 .vscode/
 .idea/
+
+# files the real-world programs write while running
+chapters/*/real_world/**/jeep_log.txt
+chapters/*/real_world/**/summary.txt
+chapters/*/real_world/**/bookmark.txt
+chapters/*/real_world/**/contacts.txt
