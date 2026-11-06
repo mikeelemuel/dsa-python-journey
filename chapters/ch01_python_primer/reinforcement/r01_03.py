@@ -14,14 +14,15 @@ Problem:
 
 Approach:
     (idea, then time/space complexity)
-    Define a function that has a signature of minmax and has formal parameter of data.
-    A data could be a list which is a mutable class.
-    To find the smallest number, declare a variable to store a default value of smallest and biggest value
-    Use for loop to iterate the sequence of numbers
-    Make a condition that would check if the current smallest value is smallest than the current value of the current index,
-    if not, replace the current smallest value with the value of the current index
-    Same thing with the biggest value
+    Define minmax(data), where data is any sequence of numbers (list, tuple, ...).
+    Start both smallest and biggest at data[0], so they begin as real values from the input.
+    Loop over every value in data:
+        - if the value is less than smallest, it becomes the new smallest
+        - otherwise, if it is greater than biggest, it becomes the new biggest
+    Return (smallest, biggest) as a tuple.
 
+    Time:  O(n) - one pass over the n items, constant work per item.
+    Space: O(1) - only two extra variables (smallest, biggest), no matter how big n is.
 
 Notes:
     - data[0] works because the input has at least one number; an empty sequence
