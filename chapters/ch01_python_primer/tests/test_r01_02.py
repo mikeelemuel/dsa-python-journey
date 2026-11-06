@@ -18,7 +18,6 @@ def test_is_even_basic():
         (-6, True),       # negative even
         (-3, False),      # negative odd
         (10**18, True),   # very large even
-        # YOUR TURN 2: add 2 rows. A very large ODD number? -1?
     ],
 )
 def test_is_even_edge_cases(k, expected):
