@@ -28,6 +28,8 @@ Hint:
 
 Approach:
     (idea, then time/space complexity)
+    To open a file, we will use fp = open('filename')
+    We will use the readline() method to read the file line by line
 
 Notes:
     (gotchas, what you learned)
@@ -35,7 +37,31 @@ Notes:
 
 
 # your solution here
+def grade_summarization():
+    with open("data/grades.txt") as fp, open("data/summary.txt", "w") as out:
+        for line in fp:
+            line = line.strip()
+            if line == "":
+                continue
+
+            parts = line.split(",")
+            name = parts[0]
+
+            total = 0
+            count = 0
+            for s in parts[1:]:
+                total += int(s)
+                count += 1
+
+            average = total / count
+
+            if average >= 75:
+                status = "PASSED"
+            else:
+                status = "FAILED"
+
+            print(f"{name:<6}{average:.2f}  {status}", file=out)
 
 
 if __name__ == "__main__":
-    pass
+    grade_summarization()
