@@ -2,8 +2,8 @@
 W-1.6.2 | Chapter 1: Python Primer
 Type: Real-world · ★★ Building up
 Section: 1.6 Simple Input and Output · book pp.30–32    ->  python tools/show.py W-1.6.2
-Status: in-progress            # todo | in-progress | done | skipped
-Date:
+Status: done                   # todo | in-progress | done | skipped
+Date: 2026-11-09
 Time:
 
 Title: Jeepney dispatcher log
@@ -39,6 +39,15 @@ Approach:
     Write the line to the file, add 1 to the count, and add the fare to the total.
 Notes:
     (gotchas, what you learned)
+    - 'a' (append): each run adds its lines to the END of the file. After two
+      runs the file had 4 lines; the first run's lines were still there.
+    - 'w' (write): opening the file empties it first. After two runs it had
+      only 2 lines, from the last run; the earlier ones were gone.
+    - Use 'a' for a log you keep adding to; use 'w' only to start fresh.
+    - write() adds no newline, so end each string with "\n".
+    - The path data/jeep_log.txt is relative to the folder you run from, not
+      to the .py file. Run it from s06_input_output/ or the data/ folder
+      won't be found.
 """
 
 
