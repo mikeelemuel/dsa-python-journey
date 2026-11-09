@@ -2,8 +2,8 @@
 W-1.6.3 | Chapter 1: Python Primer
 Type: Real-world · ★★ Building up
 Section: 1.6 Simple Input and Output · book pp.30–32    ->  python tools/show.py W-1.6.3
-Status: todo            # todo | in-progress | done | skipped
-Date:
+Status: done            # todo | in-progress | done | skipped
+Date: 2026-11-09
 Time:
 
 Title: Class average from a file
@@ -33,6 +33,23 @@ Approach:
 
 Notes:
     (gotchas, what you learned)
+    - `for line in fp` reads one line at a time, which is simpler than calling
+      readline() in a loop (the Approach above mentions readline, but the
+      for loop is what the solution uses).
+    - Each line keeps its trailing "\n", so strip() it before split(",").
+      Otherwise the last score is "79\n". int() would still accept it, but the
+      blank-line check would not.
+    - Skip blank lines (`continue`). A trailing empty line would otherwise
+      crash on int() or divide by zero.
+    - print(..., file=out) writes to the file and adds the newline for you,
+      unlike out.write().
+    - One `with` can open two files: `with open(a) as fp, open(b, "w") as out`.
+      Both are closed when the block ends.
+    - f"{name:<6}" pads the name to 6 characters so the columns line up;
+      {average:.2f} gives 2 decimals.
+    - Paths are relative to the folder you run from, so run it from
+      s06_input_output/.
+    - Time O(n) over all scores, space O(1) (one line at a time).
 """
 
 
