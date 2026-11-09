@@ -2,8 +2,8 @@
 W-1.7.2 | Chapter 1: Python Primer
 Type: Real-world · ★★ Building up
 Section: 1.7 Exception Handling · book pp.33–38    ->  python tools/show.py W-1.7.2
-Status: todo            # todo | in-progress | done | skipped
-Date:
+Status: skipped            # todo | in-progress | done | skipped
+Date: 2026-11-09
 Time:
 
 Title: Name that error
