@@ -53,11 +53,14 @@ def bar(done, total, width=20):
 
 
 def streak(dates):
-    """Consecutive weekdays (ending today or the last weekday) with at least one exercise done."""
+    """Consecutive weekdays, ending at the last session, with at least one exercise done.
+
+    Anchored to the last session, not date.today(), so CI (UTC) regenerates an identical PROGRESS.md.
+    """
     days = {date.fromisoformat(d) for d in dates}
-    day = date.today()
-    while day.weekday() >= 5 or (day == date.today() and day not in days):
-        day -= timedelta(days=1)
+    if not days:
+        return 0
+    day = max(days)
     count = 0
     while day in days or day.weekday() >= 5:
         if day.weekday() < 5:
