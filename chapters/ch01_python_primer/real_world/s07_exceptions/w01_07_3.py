@@ -2,8 +2,8 @@
 W-1.7.3 | Chapter 1: Python Primer
 Type: Real-world · ★★ Building up
 Section: 1.7 Exception Handling · book pp.33–38    ->  python tools/show.py W-1.7.3
-Status: todo            # todo | in-progress | done | skipped
-Date:
+Status: done            # todo | in-progress | done | skipped
+Date: 2026-11-12
 Time:
 
 Title: ATM withdrawal guard
@@ -31,14 +31,43 @@ Hint:
 
 Approach:
     (idea, then time/space complexity)
+    define a function that has a signature of withdraw that has a formal parameters of balance and amount both can be float
+    Raise a TypeError if the amount or balance is not a numeric
+    Raise a ValueError if the balance or amount is not a positive or a multiple of 100
+    Raise a ValueError if insufficient balance
+    Use try catch
+
+    Time:  O(1).  Space: O(1).
 
 Notes:
     (gotchas, what you learned)
+    - withdraw RAISES; the caller CATCHES. My first try put try/except inside
+      withdraw and never raised, so withdraw(2000, 3000) printed -1000.
+    - balance - amount never raises ValueError on its own; I have to raise it.
+    - Check the type first: "2000" % 100 raises a confusing TypeError
+      ("not all arguments converted during string formatting").
+    - Return the new balance; let the caller decide what to print.
+    - except (TypeError, ValueError) as e + type(e).__name__ prints
+      "ValueError: insufficient balance" like the example.
 """
 
 
 # your solution here
+def withdraw(balance, amount):
+    if not isinstance(amount, (int, float)):
+        raise TypeError("amount must be a number")
+    if amount <= 0:
+        raise ValueError("amount must be positive")
+    if amount % 100 != 0:
+        raise ValueError("must be a multiple of 100")
+    if amount > balance:
+        raise ValueError("insufficient balance")
+    return balance - amount
 
 
 if __name__ == "__main__":
-    pass
+    for amount in (2000, "2000", 250, 9000, -100):
+        try:
+            print(withdraw(5000, amount))
+        except (TypeError, ValueError) as e:
+            print(f"{type(e).__name__}: {e}")
