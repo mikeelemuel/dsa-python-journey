@@ -1,0 +1,6 @@
+mike cubao 13.00
+nicolle mezza 15.00
+Ana,88,92,79
+Ben,70,65,81
+Carl,95,90,98
+Dina,74,76,72
